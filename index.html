@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SubTrack | Smart Subscription Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         TOP NAVIGATION
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                S
+            </div>
+
+            <div class="logo-text">
+
+                <b>
+                    SubTrack
+                </b>
+
+                <small>
+                    Smart Subscription Manager
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav-title">
+            Dashboard
+        </div>
+
+
+        <button class="top-add" onclick="openForm()">
+            + Add Subscription
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN PAGE
+    ========================== -->
+
+    <main class="page">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div>
+
+                <div class="eyebrow">
+                    SUBSCRIPTION DASHBOARD
+                </div>
+
+                <h1>
+                    Manage your subscriptions
+                </h1>
+
+                <p>
+                    Track your recurring payments,
+                    renewals and monthly expenses
+                    in one place.
+                </p>
+
+            </div>
+
+
+            <div class="date-pill" id="today">
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             STAT CARDS
+        ========================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    ₹
+                </div>
+
+                <div>
+
+                    <span>
+                        Monthly Expense
+                    </span>
+
+                    <strong id="monthlyExpense">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Active Plans
+                    </span>
+
+                    <strong id="activeCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ⏰
+                </div>
+
+                <div>
+
+                    <span>
+                        Upcoming Renewal
+                    </span>
+
+                    <strong id="renewalCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ₹
+                </div>
+
+                <div>
+
+                    <span>
+                        Yearly Estimate
+                    </span>
+
+                    <strong id="yearlyExpense">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             RENEWAL ALERT
+        ========================== -->
+
+        <section id="alert" class="alert">
+        </section>
+
+
+
+        <!-- =========================
+             EXPENSE SUMMARY
+        ========================== -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Expense Summary
+                    </h2>
+
+                    <p>
+                        Overview of your subscription spending
+                    </p>
+
+                </div>
+
+
+                <div class="summary-total" id="summaryTotal">
+                    ₹0
+                </div>
+
+            </div>
+
+
+            <div class="summary-grid">
+
+
+                <div class="summary-box">
+
+                    <span>
+                        Monthly
+                    </span>
+
+                    <strong id="summaryMonthly">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="summary-box">
+
+                    <span>
+                        Yearly
+                    </span>
+
+                    <strong id="summaryYearly">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+
+                <div class="summary-box">
+
+                    <span>
+                        Average / Plan
+                    </span>
+
+                    <strong id="summaryAverage">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="budget-section">
+
+                <div class="budget-top">
+
+                    <span>
+                        Monthly Budget
+                    </span>
+
+                    <strong>
+                        ₹5,000
+                    </strong>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div id="expenseBar"></div>
+
+                </div>
+
+
+                <small id="budgetText">
+                    ₹0 used from ₹5,000
+                </small>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             SEARCH + FILTER
+        ========================== -->
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Subscriptions
+                    </h2>
+
+                    <p id="resultCount">
+                        0 subscriptions
+                    </p>
+
+                </div>
+
+
+                <div class="filters">
+
+                    <input type="text" id="search" placeholder="Search subscription..." oninput="renderTable()">
+
+
+                    <select id="filter" onchange="renderTable()">
+
+                        <option value="All">
+                            All Categories
+                        </option>
+
+                        <option value="Entertainment">
+                            Entertainment
+                        </option>
+
+                        <option value="Music">
+                            Music
+                        </option>
+
+                        <option value="Software">
+                            Software
+                        </option>
+
+                        <option value="Cloud">
+                            Cloud
+                        </option>
+
+                        <option value="Education">
+                            Education
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Subscription
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Renewal
+                            </th>
+
+                            <th>
+                                Monthly Cost
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="subscriptionList">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+
+            <!-- EMPTY STATE -->
+
+            <div id="emptyState" class="empty">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h3>
+                    No subscriptions yet
+                </h3>
+
+                <p>
+                    Add your first subscription
+                    to start tracking expenses.
+                </p>
+
+                <button onclick="openForm()" class="empty-button">
+                    + Add Subscription
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <!-- =========================
+         MODAL
+    ========================== -->
+
+    <div id="formBox" class="modal">
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
